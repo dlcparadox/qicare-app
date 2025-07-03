@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.qicare.desktop.controller.PacienteController"
+      spacing="10" alignment="CENTER" padding="20">
+    <Label text="Cadastro de Paciente" style="-fx-font-size: 18px;"/>
+
+    <TextField fx:id="nomeField" promptText="Nome"/>
+    <TextField fx:id="pesoField" promptText="Peso (kg)"/>
+    <TextField fx:id="idadeField" promptText="Idade"/>
+    <TextArea fx:id="observacoesField" promptText="Observações" prefRowCount="3"/>
+    <TextArea fx:id="analiseField" promptText="Análise" prefRowCount="3"/>
+
+    <Button text="Salvar" onAction="#salvar"/>
+</VBox>
