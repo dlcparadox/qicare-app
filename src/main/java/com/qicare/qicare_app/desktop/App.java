@@ -1,21 +1,22 @@
 package com.qicare.qicare_app.desktop;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class App extends Application {
+
     @Override
-    public void start(Stage stage) {
-        Label label = new Label("Bem-vindo ao AcuCare App");
-        Scene scene = new Scene(label, 400, 300);
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PacienteForm.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Cadastro de Paciente");
         stage.setScene(scene);
-        stage.setTitle("AcuCare App");
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

@@ -1,5 +1,14 @@
 package com.qicare.qicare_app.desktop.controller;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qicare.qicare_app.desktop.model.Paciente;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,50 +25,46 @@ public class PacienteController {
     private TextField idadeField;
 
     @FXML
+    private TextField alturaField;
+
+    @FXML
     private TextArea observacoesField;
 
     @FXML
     private TextArea analiseField;
 
     @FXML
-    private void salvar() {
-        String nome = nomeField.getText();
-        String pesoStr = pesoField.getText();
-        String idadeStr = idadeField.getText();
-        String observacoes = observacoesField.getText();
-        String analise = analiseField.getText();
-
-        // Simples validação
-        if (nome.isEmpty()) {
-            System.out.println("Nome é obrigatório!");
-            return;
-        }
-
-        Double peso = null;
-        Integer idade = null;
+    private void salvar(ActionEvent event) {
         try {
-            peso = Double.parseDouble(pesoStr);
-        } catch (NumberFormatException e) {
-            System.out.println("Peso inválido!");
-            return;
+            // 1. Ler os dados da tela
+            Paciente paciente = new Paciente();
+            paciente.setNome(nomeField.getText());
+            paciente.setPeso(pesoField.getText());
+            paciente.setIdade(idadeField.getText());
+            paciente.setObservacoes(observacoesField.getText());
+            paciente.setAnalise(analiseField.getText());
+
+            // 2. Converter para JSON
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(paciente);
+
+            // 3. Enviar para a API Spring Boot
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://192.168.0.8:8080/pacientes"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println("✅ Paciente enviado com sucesso!");
+            System.out.println("Status: " + response.statusCode());
+            System.out.println("Body: " + response.body());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("❌ Erro ao enviar paciente para API.");
         }
-
-        try {
-            idade = Integer.parseInt(idadeStr);
-        } catch (NumberFormatException e) {
-            System.out.println("Idade inválida!");
-            return;
-        }
-
-        System.out.println("Salvando paciente:");
-        System.out.println("Nome: " + nome);
-        System.out.println("Peso: " + peso);
-        System.out.println("Idade: " + idade);
-        System.out.println("Observações: " + observacoes);
-        System.out.println("Análise: " + analise);
-
-        // Aqui você chama o serviço REST para persistir no banco
-        // Exemplo:
-        // pacienteService.salvar(new Paciente(nome, peso, idade, observacoes, analise));
     }
 }

@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.qicare.desktop.controller.PacienteController"
-      spacing="10" alignment="CENTER" padding="20">
-    <Label text="Cadastro de Paciente" style="-fx-font-size: 18px;"/>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.qicare.qicare_app.desktop.controller.PacienteController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+    <children>
+        <Label text="Cadastro de Paciente" />
 
-    <TextField fx:id="nomeField" promptText="Nome"/>
-    <TextField fx:id="pesoField" promptText="Peso (kg)"/>
-    <TextField fx:id="idadeField" promptText="Idade"/>
-    <TextArea fx:id="observacoesField" promptText="Observações" prefRowCount="3"/>
-    <TextArea fx:id="analiseField" promptText="Análise" prefRowCount="3"/>
+        <TextField fx:id="nomeField" promptText="Nome" />
+        <TextField fx:id="pesoField" promptText="Peso (kg)" />
+        <TextField fx:id="alturaField" promptText="Altura (Metros)" />
+        <TextField fx:id="idadeField" promptText="Idade" />
+        <TextArea fx:id="observacoesField" promptText="Observações" prefRowCount="3"/>
+        <TextArea fx:id="analiseField" promptText="Análise" prefRowCount="3"/>
 
-    <Button text="Salvar" onAction="#salvar"/>
+        <Button text="Salvar" onAction="#salvar" />
+    </children>
 </VBox>
