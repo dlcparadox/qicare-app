@@ -6,7 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class PacienteService {
-    private static final String BASE_URL = "http://192.168.0.8:8080/api/pacientes";
+    private static final String BASE_URL = "http://192.168.0.25:8080/api/pacientes";
 
     private final HttpClient client;
 

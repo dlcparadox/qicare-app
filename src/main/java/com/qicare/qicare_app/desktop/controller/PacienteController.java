@@ -51,7 +51,7 @@ public class PacienteController {
             // 3. Enviar para a API Spring Boot
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://192.168.0.8:8080/pacientes"))
+                    .uri(new URI("http://192.168.0.25:8080/pacientes"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(json))
                     .build();
